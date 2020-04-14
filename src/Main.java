@@ -5,10 +5,17 @@ public class Main {
 		DCL ll = new DCL(); 
 		ll.addBegin(4);
 		ll.addBegin(33);
+		ll.addBegin(5);
+		ll.addBegin(23);
+		ll.addBegin(7);
+		ll.addBegin(63);
 //		ll.addAfter(1,5);
 		ll.addAtEnd(7);
 		ll.show();
-		System.out.println("Laenge der Liste : "+ll.getLenghList());
+//		System.out.println("Laenge der Liste : "+ll.getLenghList());
+		System.out.println("2 und 4 tauschen ");
+		ll.swap(2, 4);
+		ll.show();
 	}
 
 }
