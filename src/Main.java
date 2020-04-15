@@ -2,20 +2,22 @@
 public class Main {
 
 	public static void main(String[] args) {
-		DCL ll = new DCL(); 
-		ll.addBegin(4);
-		ll.addBegin(33);
-		ll.addBegin(5);
-		ll.addBegin(23);
-		ll.addBegin(7);
-		ll.addBegin(63);
-//		ll.addAfter(1,5);
-		ll.addAtEnd(7);
-		ll.show();
-//		System.out.println("Laenge der Liste : "+ll.getLenghList());
-		System.out.println("2 und 4 tauschen ");
-		ll.swap(2, 4);
-		ll.show();
+		DCL ll = new DCL(10);
+		ll.addElem(1);
+		ll.addElem(2);
+		ll.addElem(3);
+		ll.addElem(11);
+		ll.addElem(22);
+		ll.addElem(33);
+		System.out.println("Länge der Liste: " + ll.length());
+		ll.printList();
+		System.out.println("1 und 2 werden getauscht: ");
+		ll.swap(1, 2);
+		ll.printList();
+		System.out.println("Das Element mit index 5 wir geschlöscht also 22");
+		ll.deleteElem(5); 
+		System.out.println("Jetzige Länge: " + ll.length());
+		ll.printList();
 	}
 
 }

@@ -3,98 +3,96 @@ public class DCL {
 	Elem head;
 	Elem tail;
 	
-	public void addBegin(int i) {
-		Elem newE = new Elem(i);
-		newE.after =  head;
-		newE.before = null;
-		if (head != null) {
-			head.before = newE;
-		}
-		this.head = newE;
+	public DCL (int value) {
+		this.head=new Elem (value);
 		this.tail=head;
 	}
 
-	public void addAtEnd(int val) {
+	public int length() {
+		int length = 1;
+		Elem currentElem = head;
+		while (currentElem != tail) {
+			length++;
+			currentElem = currentElem.next;
+		}
+		return length;
+	}
+	private Elem getElemByIndex(int index) {
+		Elem currentElem = head;
+		int counter = 0;
+		while (index != counter) {
+			currentElem = currentElem.next;
+			counter++;
+			if (currentElem == null) {
+				System.out.println("No Element with Index: " + index + " exists!");
+				return null;
+			}
+		}
+		return currentElem;
+	}
+	private int getIndexByElem(Elem e) {
+		int index = 0;
+		Elem currentElem = head;
+		while (currentElem != e) {
+			index++;
+			currentElem = currentElem.next;
+		}
+		return index;
+	}
+	public void addElem(int val) {
 		Elem nextElem = new Elem(val);
-		tail.before = nextElem;
-		nextElem.after = tail;
+		tail.next = nextElem;
+		nextElem.last = tail;
 		tail = nextElem;
 	}
-	
-//	public void addAtEnd(int i) {
-//		Elem newE = new Elem(i);
-//		Elem last = this.head;
-//		newE.after = null;
-//		if (head == null) {
-//			newE.before = null;
-//			head = newE;
-//			return;
-//		}
-//		while (last.after != null) {
-//			last = last.after;
-//		}
-//		last.after = newE;
-//		newE.before=last;
-//	}
-    
-	public void show() {
-		System.out.println("List : ");
-		Elem el = head;
-		while (el != null) {
-			System.out.println(el.data+"	");
-			el=el.after;
+	public void deleteElem(int index) {
+		if (index < 0) {
+			System.out.println("Positive index (0 included) expected!");
+			return;
 		}
-	}
-	public int getLenghList() {
-		int lenge = 1;
-		Elem jetzt = this.head;
-		while (jetzt != tail) {
-			lenge++;
-			jetzt = jetzt.after;
+		if (index >= length()) {
+			System.out.println("Index out of Bounds!");
+			return;
 		}
-		return lenge;
+		if (index == getIndexByElem(head)) { 
+			head = head.next;
+			return;
+		}
+		if (index == getIndexByElem(tail)) {
+			tail = tail.last;
+			return;
+		}
+		Elem deleteElem = getElemByIndex(index);
+		Elem lastElem = deleteElem.last;
+		Elem nextElem = deleteElem.next;
+		lastElem.next = nextElem;
+		nextElem.last = lastElem;
 	}
-	
-	public void swap(int x, int y) 
-    { 
-        // Nothing to do if x and y are same 
-        if (x == y) return; 
-  
-        // Search for x (keep track of prevX and CurrX) 
-        Elem prevX = null, currX = head; 
-        while (currX != null && currX.data != x) 
-        { 
-            prevX = currX; 
-            currX = currX.after; 
-        } 
-  
-        // Search for y (keep track of prevY and currY) 
-        Elem prevY = null, currY = head; 
-        while (currY != null && currY.data != y) 
-        { 
-            prevY = currY; 
-            currY = currY.after; 
-        } 
-  
-        // If either x or y is not present, nothing to do 
-        if (currX == null || currY == null) 
-            return; 
-  
-        // If x is not head of linked list 
-        if (prevX != null) 
-            prevX.after = currY; 
-        else //make y the new head 
-            head = currY; 
-  
-        // If y is not head of linked list 
-        if (prevY != null) 
-            prevY.after = currX; 
-        else // make x the new head 
-            head = currX; 
-  
-        // Swap next pointers 
-        Elem temp = currX.after; 
-        currX.after = currY.after; 
-        currY.after = temp; 
-    }
+	public void swap(int index1, int index2) {
+		if (index1 == index2) {
+			System.out.println("Nothing to swap here!");
+			return;
+		}
+		Elem e1 = getElemByIndex(index1);
+		Elem e2 = getElemByIndex(index2);
+		Elem temp = e1.next;
+		e1.next = e2.next;
+		e2.next = temp;
+		temp = e1.last;
+		e1.last = e2.last;
+		e2.last = temp;
+		e1.last.last = e2;
+		e2.next.next = e1;
+		e2.last.next = e2;
+		e1.next.last = e1;
+	}
+	public void printList() {
+		Elem currentElem = head;
+		while (currentElem != null) {
+			System.out.print("Element "+currentElem);
+			System.out.print("	mit dem Wert "+currentElem.data+"\n");
+			currentElem = currentElem.next;
+		}
+		System.out.println();
+	}
 }
