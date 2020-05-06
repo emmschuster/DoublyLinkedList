@@ -1,4 +1,3 @@
-
 public class DCL {
 	Elem head;
 	Elem tail;
@@ -39,19 +38,36 @@ public class DCL {
 		}
 		return index;
 	}
-	public void addElem(int val) {
+	public void addElem(int val) {		//wird einfach zum schluss rangeh‰ngt wenn man keine genaue stelle sagt
 		Elem nextElem = new Elem(val);
 		tail.next = nextElem;
 		nextElem.last = tail;
 		tail = nextElem;
 	}
+	
+	public void addElem(int val, int index) {		//Element mit bestimmten wert kommt an bestimmte stelle (index wird angegeben)
+		Elem newElem = new Elem(val);
+		if (index == length()) { 	//schaun ob index die erste stelle is, dann head machen
+			tail.next = newElem;
+			newElem.last = tail;
+			tail = newElem;
+			return;
+		}
+		Elem nextElem = getElemByIndex(index);	//nein also beliebige stelle
+		Elem lastElem = getElemByIndex(index - 1);
+		newElem.last = lastElem;
+		newElem.next = nextElem;
+		nextElem.last = newElem;
+		lastElem.next = newElem;
+	}
+	
 	public void deleteElem(int index) {
 		if (index < 0) {
-			System.out.println("Positive index (0 included) expected!");
+			System.out.println("positiver Wert muss eingegeben werden!!!");
 			return;
 		}
 		if (index >= length()) {
-			System.out.println("Index out of Bounds!");
+			System.out.println("der index ist zu groﬂ; liste is zu klein/kurz");
 			return;
 		}
 		if (index == getIndexByElem(head)) { 
@@ -68,6 +84,7 @@ public class DCL {
 		lastElem.next = nextElem;
 		nextElem.last = lastElem;
 	}
+	
 	public void swap(int index1, int index2) {
 		if (index1 == index2) {
 			System.out.println("Nothing to swap here!");
