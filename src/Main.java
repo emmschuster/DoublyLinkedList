@@ -1,5 +1,11 @@
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 public class Main {
 
@@ -51,6 +57,26 @@ public class Main {
 		System.out.println(t4-t3+"ns hat es gedauert.");
 		
 		System.out.println("\nDie Java Implementierung ist um "+((t4-t3)-(t2-t1))+"ns schneller.");
+		
+		 PrintWriter pWriter = null;
+	        try {
+//	        	Calendar cal = Calendar.getInstance ();
+//	        	String uhrzeit= cal.get( Calendar.HOUR_OF_DAY ) + ":" +
+//	                      cal.get( Calendar.MINUTE ) + ":" +
+//	                      cal.get( Calendar.SECOND ) + ":" +
+//	                      cal.get( Calendar.MILLISECOND ) ;
+//	        	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//	        	timestamp=timestamp;
+	            pWriter = new PrintWriter(new BufferedWriter(new FileWriter("Emma.txt")));
+	            pWriter.println("Die Java Implementierung ist um "+((t4-t3)-(t2-t1))+"ns schneller.");
+	        } catch (IOException ioe) {
+	            ioe.printStackTrace();
+	        } finally {
+	            if (pWriter != null){
+	                pWriter.flush();
+	                pWriter.close();
+	            }
+	        }
 	}
 	public static void option1() {	//letztes element löscheln... da haggelts no
 		DCL ll = new DCL(10);
