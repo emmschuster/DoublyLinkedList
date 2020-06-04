@@ -1,1 +1,1 @@
-Die Java Implementierung ist um 1108400ns schneller.
+Die Java Implementierung ist um 27156100ns schneller.
