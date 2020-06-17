@@ -7,9 +7,10 @@ import java.util.Scanner;
 
 public class Main {
 	static String stempel;
-	static long t1,t2,t3,t4;
+	static long t1,t2,t3,t4,t5,t6 ;
 	static DCL ll = new DCL(10);
 	static LinkedList<Integer>JavaListe2=new LinkedList<Integer>();
+	static LinkedListMeins l = new LinkedListMeins(10);	
 
 	public static void main(String[] args) {
 		Scanner sc= new Scanner (System.in);
@@ -19,7 +20,7 @@ public class Main {
 		System.out.println("Willst du...");
 		System.out.println("... das Programm mit der DVL Liste starten? Dann 1");
 		System.out.println("... Das DVL Program mit der DVL von Java vergleichen (allgemein durchschnitt zeit) ? Dann 2");
-		System.out.println("... wieder vergleichen, aber diesmal die einzelnen Vorgänge? Dann 3");
+		System.out.println("... wieder vergleichen, aber diesmal die einzelnen Vorgänge (meine DVL, meine EVL und die Java Verion) ? Dann 3");
 
 		int antwort = sc.nextInt();
 		switch (antwort) {
@@ -37,18 +38,7 @@ public class Main {
 		
 	}
 	private static void option3() {
-		ll.addElem(1);
-		ll.addElem(2);
-		ll.addElem(3);
-		ll.addElem(11);
-		ll.addElem(22);
-		ll.addElem(33);
-		JavaListe2.add(1);
-		JavaListe2.add(2);
-		JavaListe2.add(3);
-		JavaListe2.add(11);
-		JavaListe2.add(22);
-		JavaListe2.add(33);
+		hinzufuegen();
 		laenge();
 		addElementSchluss();
 		addElementBestimmteStelle();
@@ -56,6 +46,33 @@ public class Main {
 		deleteFirst();
 		deleteLast();
 //		tauschen();
+	}
+	private static void hinzufuegen() {
+		t1=System.nanoTime();
+		ll.addElem(1);
+		ll.addElem(2);
+		ll.addElem(3);
+		ll.addElem(11);
+		ll.addElem(22);
+		ll.addElem(33);
+		t2=System.nanoTime();
+		t3=System.nanoTime();
+		JavaListe2.add(1);
+		JavaListe2.add(2);
+		JavaListe2.add(3);
+		JavaListe2.add(11);
+		JavaListe2.add(22);
+		JavaListe2.add(33);
+		t4=System.nanoTime();
+		t5=System.nanoTime();
+		l.addElement(1);
+		l.addElement(2);
+		l.addElement(3);
+		l.addElement(11);
+		l.addElement(22);
+		l.addElement(33);
+		t6=System.nanoTime();
+		System.out.println("Hinzufuegen (Anfangs; je 6 Werte) (Dauer) :\tMeine DVL "+(t2-t1)+"s\tJavas Linked List "+(t4-t3)+"s\tEinfachVL "+(t6-t5)+"s");
 	}
 	/*private static void tauschen() {
 		t1=System.nanoTime();
@@ -65,8 +82,8 @@ public class Main {
 		JavaListe2.
 		t4=System.nanoTime();
 		System.out.println("Anzeigen der Liste (Dauer) : Meine DVL "+(t2-t1)+"s		Javas Linked List "+(t4-t3));
-		
 	}*/
+	
 	private static void deleteLast() {
 		t1=System.nanoTime();
 		ll.deleteTail();
@@ -74,7 +91,7 @@ public class Main {
 		t3=System.nanoTime();
 		JavaListe2.removeLast();
 		t4=System.nanoTime();
-		System.out.println("Letztes Element loeschen (Dauer) : Meine DVL "+(t2-t1)+"s		Javas Linked List "+(t4-t3));
+		System.out.println("Letztes Element loeschen (Dauer) :\t\tMeine DVL "+(t2-t1)+"s\t\tJavas Linked List "+(t4-t3));
 	}
 	private static void deleteFirst() {
 		t1=System.nanoTime();
@@ -83,7 +100,7 @@ public class Main {
 		t3=System.nanoTime();
 		JavaListe2.removeFirst();
 		t4=System.nanoTime();
-		System.out.println("Erstes Element loeschen (Dauer) : Meine DVL "+(t2-t1)+"s		Javas Linked List "+(t4-t3));
+		System.out.println("Erstes Element loeschen (Dauer) :\t\tMeine DVL "+(t2-t1)+"s\t\tJavas Linked List "+(t4-t3));
 	}
 	private static void deleteDenIndex() {		//deleteElem vs remove
 		t1=System.nanoTime();
@@ -92,7 +109,10 @@ public class Main {
 		t3=System.nanoTime();
 		JavaListe2.remove(4);
 		t4=System.nanoTime();
-		System.out.println("Element beliebige Stelle loeschen (Dauer) : Meine DVL "+(t2-t1)+"s		Javas Linked List "+(t4-t3));
+		t5=System.nanoTime();
+		l.deleteElement(4);
+		t6=System.nanoTime();
+		System.out.println("Element beliebige Stelle loeschen (Dauer) :\tMeine DVL "+(t2-t1)+"s\t\tJavas Linked List "+(t4-t3)+"s\t\tEinfachVL "+(t6-t5)+"s");
 	}
 	private static void addElementBestimmteStelle() {
 		t1=System.nanoTime();
@@ -101,7 +121,7 @@ public class Main {
 		t3=System.nanoTime();
 		JavaListe2.add(4, 1001);
 		t4=System.nanoTime();
-		System.out.println("Element beliebige Stelle hinzufuegen (Dauer) : Meine DVL "+(t2-t1)+"s		Javas Linked List "+(t4-t3));
+		System.out.println("Element beliebige Stelle hinzufuegen (Dauer) :\tMeine DVL "+(t2-t1)+"s\tJavas Linked List "+(t4-t3));
 	}
 	private static void addElementSchluss() {
 		t1=System.nanoTime();
@@ -110,7 +130,7 @@ public class Main {
 		t3=System.nanoTime();
 		JavaListe2.add(1000);
 		t4=System.nanoTime();
-		System.out.println("Element hinten hinzufuegen (Dauer) : Meine DVL "+(t2-t1)+"s		Javas Linked List "+(t4-t3));
+		System.out.println("Element hinten hinzufuegen (Dauer) :\t\tMeine DVL "+(t2-t1)+"s\t\tJavas Linked List "+(t4-t3));
 	}
 	private static void laenge() {		//length vs size
 		t1=System.nanoTime();
@@ -119,7 +139,10 @@ public class Main {
 		t3=System.nanoTime();
 		JavaListe2.size();
 		t4=System.nanoTime();
-		System.out.println("Laenge herausfinden (Dauer) : Meine DVL "+(t2-t1)+"s 		 Javas Linked List "+(t4-t3));
+		t5=System.nanoTime();
+		l.getlenghtList();
+		t6=System.nanoTime();
+		System.out.println("Laenge herausfinden (Dauer) :\t\t\tMeine DVL "+(t2-t1)+"s\t\tJavas Linked List "+(t4-t3)+"s\t\tEinfachVL "+(t6-t5)+"s");
 	}
 	public static void option2() {
 		System.out.println("Zeitmessung Java DVK 1000 Durchgänge (erstellen, 4 hinzufügen, "
